@@ -44,14 +44,14 @@ const Header = () => {
     mutationFn: signout,
     onSuccess: () => {
       localStorage.removeItem("user");
-      navigate("/login");
+      navigate("/events");
     },
   });
   const handleLogout = () => {
     mutate(null, {
       onSuccess: () => {
         localStorage.removeItem("token");
-        navigate("/login");
+        navigate("/events");
       },
     });
   };
