@@ -16,29 +16,35 @@ const Request = lazy(() => import("./screen/Request"));
 const About = lazy(() => import("./screen/About"));
 
 const App = () => {
-	return (
-		<Suspense fallback={<Spinner />}>
-			<Router>
-				<div className="max-w-screen-wide bg-background mx-auto">
-					<Routes>
-						<Route path="/" element={<GetStarted />} />
-						<Route path="/events" element={<Events />} />
-						<Route path="/events/:eventId" element={<Event />} />
-						<Route path="/chats" element={<Group />} />
-						<Route path="/create-events" element={<CreateEvents />} />
-						<Route path="/updateEvent/:eventId" element={<EditEvents />} />
-						<Route path="/dashboard" element={<Dashboard />} />
-						<Route path="/request" element={<Request />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/signup" element={<Signup />} />
-						<Route path="/payments/:eventId" element={<PaymentPage />} />
-						<Route path="/about" element={<About />} />
-						<Route path="*" element={<div>Not Found</div>} />
-					</Routes>
-				</div>
-			</Router>
-		</Suspense>
-	);
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full h-screen">
+          <Spinner />
+        </div>
+      }
+    >
+      <Router>
+        <div className="max-w-screen-wide bg-background mx-auto">
+          <Routes>
+            <Route path="/" element={<GetStarted />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/events/:eventId" element={<Event />} />
+            <Route path="/chats" element={<Group />} />
+            <Route path="/create-events" element={<CreateEvents />} />
+            <Route path="/updateEvent/:eventId" element={<EditEvents />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/request" element={<Request />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/payments/:eventId" element={<PaymentPage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<div>Not Found</div>} />
+          </Routes>
+        </div>
+      </Router>
+    </Suspense>
+  );
 };
 
 export default App;
