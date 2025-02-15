@@ -108,7 +108,8 @@ const EventSection = ({ event }) => {
         <p className="text-gray-200">
           Refreshments: {event?.refreshments ? "Provided" : "Not Provided"}
         </p>
-        {event?.userId._id !== user._id &&
+        {user &&
+          event?.userId?._id !== user?._id &&
           (event?.paid ? (
             <Link
               className="p-2 bg-blue-500 w-fit rounded-lg text-center"
@@ -126,7 +127,7 @@ const EventSection = ({ event }) => {
         <p className="text-lg text-gray-200">{event?.comments} Comments</p>
         <button
           className={`px-6 py-2 text-white rounded-md hover:bg-gray-700 ${
-            event?.likes?.includes(user._id) ? "bg-blue-500" : "bg-zinc-600"
+            event?.likes?.includes(user?._id) ? "bg-blue-500" : "bg-zinc-600"
           }`}
         >
           Like ({event?.likes?.length})
