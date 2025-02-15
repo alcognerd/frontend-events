@@ -9,12 +9,12 @@ const EventList = () => {
 	const queryClient = useQueryClient();
 	const location = useLocation();
 	const [page, setPage] = useState(1);
-	const { isLoading, isError, isSuccess, data } = useQuery({
+	const { isLoading, isPending, isError, isSuccess, data } = useQuery({
 		queryKey: ["events", page],
 		queryFn: fetchBlogs,
 		keepPreviousData: true,
 	});
-	if (isSuccess) window.scrollTo({ top: 0, behavior: "smooth" });
+	if (isPending) window.scrollTo({ top: 0, behavior: "smooth" });
 	useEffect(() => {
 		queryClient.invalidateQueries(["events"]); // Invalidate and refetch events after navigation
 	}, [location?.pathname, queryClient]);
@@ -35,27 +35,29 @@ const EventList = () => {
 					<Event event={event} key={event?._id} toDisplay={true} />
 				))}
 			</div>
-			<div className="flex justify-center items-center pb-10 mx-auto mt-3 space-x-4 ">
-				<button
-					className="px-2 py-1 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:opacity-50"
-					onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-					disabled={page === 1}
-				>
-					Previous
-				</button>
+			{data?.totalPages > 1 && (
+				<div className="flex justify-center items-center pb-10 mx-auto mt-3 space-x-4 ">
+					<button
+						className="px-2 py-1 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:opacity-50"
+						onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+						disabled={page === 1}
+					>
+						Previous
+					</button>
 
-				<span className="text-white">
-					Page {page} of {data?.totalPages}
-				</span>
+					<span className="text-white">
+						Page {page} of {data?.totalPages}
+					</span>
 
-				<button
-					className="px-3 py-1 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:opacity-50"
-					onClick={() => setPage((prev) => prev + 1)}
-					disabled={page >= data?.totalPages}
-				>
-					Next
-				</button>
-			</div>
+					<button
+						className="px-3 py-1 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:opacity-50"
+						onClick={() => setPage((prev) => prev + 1)}
+						disabled={page >= data?.totalPages}
+					>
+						Next
+					</button>
+				</div>
+			)}
 		</div>
 	);
 };

@@ -83,7 +83,7 @@ const ContactForm = () => {
 						Message
 					</label>
 					<textarea
-						className="bg-black bg-opacity-50 border-2 border-black focus:border-blue-400  hover:border-blue-400 outline-none transition duration-200 rounded-md min-h-10  pl-2 py-2 "
+						className="bg-black max-h-20 bg-opacity-50 border-2 border-black focus:border-blue-400  hover:border-blue-400 outline-none transition duration-200 rounded-md min-h-10  pl-2 py-2 "
 						name="message"
 						id="message"
 						placeholder="Your feedback / complaint"
